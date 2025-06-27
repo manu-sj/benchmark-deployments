@@ -12,7 +12,7 @@ class FeatureStoreOnlineUser(FeatureStoreUser):
         self.host = "<YOUR_HOST_IP>" 
 
         self.headers = {
-            "Host": "<YOUR_HEADERS_HOST>",
+            "Host": "<YOUR_HOST_HEADER>",
             'Authorization': 'ApiKey <YOUR_API_KEY>',
         }
 
