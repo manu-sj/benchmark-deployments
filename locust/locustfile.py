@@ -9,11 +9,11 @@ class FeatureStoreOnlineUser(FeatureStoreUser):
         self,
         environment: Environment,
     ):
-        self.host = "http://51.89.10.50/" 
+        self.host = "<YOUR_HOST_IP>" 
 
         self.headers = {
-            "Host": "deploymentasyncrdrs.test.hopsworks.ai",
-            'Authorization': 'ApiKey ',
+            "Host": "<YOUR_HEADERS_HOST>",
+            'Authorization': 'ApiKey <YOUR_API_KEY>',
         }
 
         super().__init__(

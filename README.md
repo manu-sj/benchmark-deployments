@@ -1,0 +1,34 @@
+# Benchmarking a Deployment on Hopsworks
+
+This repository benchmarks a deployment running inside **Hopsworks** using [Locust](https://locust.io/).
+
+## Benchmarking Steps
+
+1. **Create a Deployment**
+   - Run all the provided notebooks to set up your deployment inside Hopsworks.
+
+2. **Configure Target Host**
+   - Add the **host name** and **IP address** of your deployment in [`locustfile.py`](https://github.com/manu-sj/benchmark-deployments/blob/main/locust/locustfile.py#L12).
+   - You can find this information in the Hopsworks **Deployment UI**.
+
+3. **Add Hopsworks API Key**
+   - Insert your Hopsworks API key into the same [`locustfile.py`](https://github.com/manu-sj/benchmark-deployments/blob/main/locust/locustfile.py#L12).
+   - Generate the API key by following [this guide](https://docs.hopsworks.ai/latest/user_guides/projects/api_key/create_api_key/).
+
+4. **Build the Locust Docker Image**
+   - Use the provided [Dockerfile](https://github.com/manu-sj/benchmark-deployments/blob/main/locust/Dockerfile) to build a Locust image.
+   - Push the image to your preferred container registry.
+
+5. **Update Kubernetes Manifests**
+   - Update the image URL in both:
+     - [`master-deployment.yaml`](https://github.com/manu-sj/benchmark-deployments/blob/main/locust/kubernetes-locust/master-deployment.yaml#L28)
+     - [`slave-deployment.yaml`](https://github.com/manu-sj/benchmark-deployments/blob/main/locust/kubernetes-locust/slave-deployment.yaml#L28)
+
+6. **Deploy Locust**
+   - Run the [deployment script](https://github.com/manu-sj/benchmark-deployments/blob/main/locust/kubernetes-locust/deploy.sh) to deploy Locust master and worker nodes.
+   - This will deploy into a Kubernetes namespace named `locust`.
+   - **Note:** Ensure you have `kubectl` access to the cluster.
+
+7. **Access Locust UI**
+   - Once deployed, port-forward port `8089` from the `locust-master` service to your local machine.
+   - Access the Locust Web UI at [http://localhost:8089](http://localhost:8089) to run and monitor your load tests.
