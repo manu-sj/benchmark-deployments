@@ -25,7 +25,7 @@ spec:
         app: locust-worker
     spec:
       containers:
-      - image: 
+      - image: <IMAGE_URL>
         imagePullPolicy: Always
         name: worker
         args: ["--worker", "--master-host=locust-master"]
